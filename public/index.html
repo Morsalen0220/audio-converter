@@ -5,6 +5,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Universal Online Audio Converter</title>
     <script src="https://cdn.tailwindcss.com"></script>
+    <script src="/ffmpeg/ffmpeg.js"></script>
+    <script src="/ffmpeg/util.js"></script>
     <style>
         .hidden { display: none !important; }
         .drag-over { border-color: #3b82f6 !important; background-color: #eff6ff !important; }
@@ -14,8 +16,19 @@
     <div class="container mx-auto px-4 py-8 max-w-3xl">
         <header class="text-center mb-10">
             <h1 class="text-4xl font-bold text-blue-600 mb-2">Universal Audio Converter</h1>
-            <p class="text-gray-600">Convert your audio files easily to MP3, WAV, FLAC, OGG, or M4A</p>
+            <p class="text-gray-600">Convert your audio files easily to MP3, WAV, FLAC, OGG, or M4A completely in your browser!</p>
         </header>
+
+        <!-- FFmpeg Status -->
+        <div id="status-container" class="bg-blue-50 border-l-4 border-blue-500 p-4 mb-6">
+            <div class="flex items-center">
+                <svg class="animate-spin -ml-1 mr-3 h-5 w-5 text-blue-500" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24">
+                    <circle class="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" stroke-width="4"></circle>
+                    <path class="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8V0C5.373 0 0 5.373 0 12h4zm2 5.291A7.962 7.962 0 014 12H0c0 3.042 1.135 5.824 3 7.938l3-2.647z"></path>
+                </svg>
+                <p id="status-message" class="text-sm text-blue-700 font-medium">Loading FFmpeg core...</p>
+            </div>
+        </div>
 
         <div class="bg-white rounded-lg shadow-md p-6 mb-6">
             <!-- File Upload -->
