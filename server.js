@@ -3,6 +3,9 @@ const multer = require('multer');
 const path = require('path');
 const fs = require('fs');
 const ffmpeg = require('fluent-ffmpeg');
+const ffmpegInstaller = require('@ffmpeg-installer/ffmpeg');
+
+ffmpeg.setFfmpegPath(ffmpegInstaller.path);
 
 const app = express();
 const port = process.env.PORT || 3000;
@@ -79,7 +82,7 @@ app.post('/convert', upload.single('audio'), (req, res) => {
       fs.unlink(inputPath, (e) => {
         if (e) console.error('Failed to delete uploaded file:', e);
       });
-      res.status(500).json({ error: 'An error occurred during conversion.' });
+      res.status(500).json({ error: err.message || 'An error occurred during conversion.' });
     })
     .save(outputPath);
 });
